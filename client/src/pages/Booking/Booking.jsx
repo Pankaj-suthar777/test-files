@@ -367,23 +367,25 @@ const Booking = () => {
                       <Button
                         variant="contained"
                         onClick={(e) => {
-                          if (appointments.length > 0) {
-                            const firstAppointment = appointments.find(
-                              (appointment) => !appointment.isPaid
-                            );
-                            setSelectedAvailableAppointments([
-                              firstAppointment,
-                            ]);
-                            setSelectedSession({
-                              sessionid: firstAppointment._id,
-                              time: firstAppointment.availabilityData.split(
-                                " "
-                              )[1],
-                              date: firstAppointment.availabilityData.split(
-                                " "
-                              )[0],
-                              serviceId: id,
-                            });
+                          if (appointments.length > 1) {
+                            if (appointments.length > 0) {
+                              const firstAppointment = appointments.find(
+                                (appointment) => !appointment.isPaid
+                              );
+                              setSelectedAvailableAppointments([
+                                firstAppointment,
+                              ]);
+                              setSelectedSession({
+                                sessionid: firstAppointment._id,
+                                time: firstAppointment.availabilityData.split(
+                                  " "
+                                )[1],
+                                date: firstAppointment.availabilityData.split(
+                                  " "
+                                )[0],
+                                serviceId: id,
+                              });
+                            }
                           }
                         }}
                       >

@@ -117,7 +117,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/error"
+            path="/cancel"
             element={
               <Protected>
                 <ErrorPage></ErrorPage>
