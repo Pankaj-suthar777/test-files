@@ -95,7 +95,7 @@ const CheckOutDeatilsForm = () => {
           "Content-Type": "application/json",
         };
         const response = await fetch(
-          "http://localhost:5000/api/create-checkout-process",
+          `${deployed_url}/api/create-checkout-process`,
           {
             method: "POST",
             headers: headers,

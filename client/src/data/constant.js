@@ -89,3 +89,5 @@ export const AboutUsProfileCard = [
     message: "Use this area to describe your staff member.",
   },
 ];
+
+export const deployed_url = "https://test-files-52iw.onrender.com";
