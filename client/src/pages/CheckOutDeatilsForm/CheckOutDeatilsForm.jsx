@@ -15,7 +15,11 @@ import { SetToast } from "../../redux/toastSlice";
 import { GetCheckOutAppointment } from "../../apicalls/appointment";
 import { loadStripe } from "@stripe/stripe-js";
 import { SetLoader } from "../../redux/loadersSlice";
-import { deployed_url } from "../../data/constant";
+import {
+  deployed_url,
+  serviceBooking,
+  stripe_publishable_key,
+} from "../../data/constant";
 
 const CheckOutDeatilsForm = () => {
   const navigate = useNavigate();
@@ -70,9 +74,7 @@ const CheckOutDeatilsForm = () => {
     if (res.data.isBooked === false) {
       const resAppontment = await GetCheckOutAppointment(sessionId);
       if (!resAppontment.isBooked) {
-        const stripe = await loadStripe(
-          "pk_test_51OhvW7Gr7paNn0fxbC8fWbjyifJHhT5vKdT8IR2oz8X8bAbz0oiJaqHMg8B9bUjNaEwBffNgspnjAR0QlISGQPel00EN3uyBLK"
-        );
+        const stripe = await loadStripe(stripe_publishable_key);
         const order = {
           appointmentId: session._id,
           price: service.price,
@@ -250,11 +252,11 @@ const CheckOutDeatilsForm = () => {
               {session.availabilityData?.split(" ")[1]?.split("-")[2]}
             </p>
             <p className="text-[#0A2472]  lg:text-md w-full text-sm mt-3">
-              San Francisco
+              {serviceBooking.location}
             </p>
 
             <p className="text-[#0A2472]  lg:text-md w-full text-sm">
-              Markus Rau
+              {serviceBooking.personName}
             </p>
             <p className="text-[#0A2472]  lg:text-md w-full text-sm">
               {service.duration}

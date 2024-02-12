@@ -7,15 +7,16 @@ import { SetLoader } from "../../redux/loadersSlice";
 const Services = () => {
   const [services, setServices] = useState([]);
   const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchData() {
-      dispatch(SetLoader(true));
-      const response = await GetAllServices();
-      dispatch(SetLoader(false));
-      if (response.success) {
-        setServices(response.data);
-      }
+
+  async function fetchData() {
+    dispatch(SetLoader(true));
+    const response = await GetAllServices();
+    dispatch(SetLoader(false));
+    if (response.success) {
+      setServices(response.data);
     }
+  }
+  useEffect(() => {
     fetchData();
   }, []);
   return (

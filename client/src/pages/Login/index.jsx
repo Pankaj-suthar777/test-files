@@ -116,7 +116,7 @@ const Login = () => {
               sign in
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
-              Already don't an account?{" "}
+              Don't have an account?{" "}
               <span
                 className="font-medium text-gray-900 cursor-pointer"
                 onClick={() => navigate("/signup")}

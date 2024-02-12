@@ -19,6 +19,7 @@ const index = () => {
         <div className="flex lg:flex-row flex-col  h-full w-screen">
           <div className=" justify-center items-center  w-full lg:hidden flex md:px-28 mb-12">
             <img
+              alt=""
               src={sideImg}
               className="object-fill   w-full md:h-[800px] md:w-full"
             ></img>
