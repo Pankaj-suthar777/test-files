@@ -1,3 +1,5 @@
+export const deployed_url = "https://test-files-52iw.onrender.com";
+
 export const infoOfBusiness = {
   Address: "500 Terry Francine Street, San Francisco, CA 94158",
   email: "Info@mysite.com",
@@ -89,5 +91,3 @@ export const AboutUsProfileCard = [
     message: "Use this area to describe your staff member.",
   },
 ];
-
-export const deployed_url = "https://test-files-52iw.onrender.com";
