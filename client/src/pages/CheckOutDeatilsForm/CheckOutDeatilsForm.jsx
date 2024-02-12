@@ -15,6 +15,7 @@ import { SetToast } from "../../redux/toastSlice";
 import { GetCheckOutAppointment } from "../../apicalls/appointment";
 import { loadStripe } from "@stripe/stripe-js";
 import { SetLoader } from "../../redux/loadersSlice";
+import { deployed_url } from "../../data/constant";
 
 const CheckOutDeatilsForm = () => {
   const navigate = useNavigate();
