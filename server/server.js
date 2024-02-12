@@ -29,24 +29,25 @@ app.post(
       console.log("here");
       console.log(sessionDetails);
       const CheckAppointment = Appointment.findById(appointmentId);
-            if (CheckAppointment.isPaid === false) {
-              // Update the appointment status to "processed" in the database
-              const appointment = await Appointment.findByIdAndUpdate(
-                appointmentId,
-                {
-                  profilePicture: sessionDetails.profilePicture,
-                  serviceTitle: sessionDetails.serviceTitle,
-                  clientId: sessionDetails.clientId,
-                  phone: sessionDetails.phone,
-                  availabilityData: sessionDetails.availabilityData,
-                  isPaid: sessionDetails.isPaid,
-                  isBooked: sessionDetails.isBooked,
-                  message: sessionDetails.message,
-                  email: sessionDetails.email,
-                  name: sessionDetails.name,
-                },
-                { new: true } // Return the updated document
-              );
+      if (CheckAppointment.isPaid === false) {
+        // Update the appointment status to "processed" in the database
+        const appointment = await Appointment.findByIdAndUpdate(
+          appointmentId,
+          {
+            profilePicture: sessionDetails.profilePicture,
+            serviceTitle: sessionDetails.serviceTitle,
+            clientId: sessionDetails.clientId,
+            phone: sessionDetails.phone,
+            availabilityData: sessionDetails.availabilityData,
+            isPaid: sessionDetails.isPaid,
+            isBooked: sessionDetails.isBooked,
+            message: sessionDetails.message,
+            email: sessionDetails.email,
+            name: sessionDetails.name,
+          },
+          { new: true } // Return the updated document
+        );
+      }
 
       console.log("Appointment status updated:", appointment);
       console.log("payment successfully");
