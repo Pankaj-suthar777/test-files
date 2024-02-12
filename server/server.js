@@ -28,7 +28,7 @@ app.post(
       const sessionDetails = JSON.parse(event.data.object.metadata.session);
       console.log("here");
       console.log(sessionDetails);
-      const CheckAppointment = Appointment.findById(appointmentId);
+      const CheckAppointment = await Appointment.findById(appointmentId);
       if (CheckAppointment.isPaid === false) {
         // Update the appointment status to "processed" in the database
         const appointment = await Appointment.findByIdAndUpdate(
@@ -47,10 +47,10 @@ app.post(
           },
           { new: true } // Return the updated document
         );
-      }
 
-      console.log("Appointment status updated:", appointment);
-      console.log("payment successfully");
+        console.log("Appointment status updated:", appointment);
+        console.log("payment successfully");
+      }
     } else {
       console.log("Payment rejected");
     }
