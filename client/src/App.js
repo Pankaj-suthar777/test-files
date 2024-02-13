@@ -13,6 +13,7 @@ import Profile from "./pages/Profile/Profile";
 import Admin from "./pages/Admin/Admin";
 import Booking from "./pages/Booking/Booking";
 import CheckOutDeatilsForm from "./pages/CheckOutDeatilsForm/CheckOutDeatilsForm";
+/* eslint-disable-next-line padded-blocks */
 
 import ErrorPage from "./pages/ErrorPage/Error";
 import SuccessPage from "./pages/SuccessPage/Success";

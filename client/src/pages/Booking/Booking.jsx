@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { SetLoader } from "../../redux/loadersSlice";
 import { SetToast } from "../../redux/toastSlice";
 import { Card, CardBody, CardFooter } from "@material-tailwind/react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const Booking = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -223,15 +223,19 @@ const Booking = () => {
               </div>
             </div>
 
-            <div className="mx-5 mt-0 xl:mt-[60px]">
+            <div className="mx-5 mt-0 ">
               <Card className="w-full pt-8 h-[320px]">
                 <CardBody>
-                  <p className="text-[#0A2472]  w-full text-md  mb-6">
+                  <p className="text-[#0A2472]  w-full text-lg  mb-5">
                     Service Details
+                  </p>
+                  <p className="text-[#0A2472]   w-full text-sm mb-1">
+                    {appointments[0]?.service?.title}
                   </p>
                   <p className="text-[#0A2472]   w-full text-sm  mb-3">
                     {selectedSession.time
-                      ? `${appointments[0]?.service?.title} ${formattedDate}, at ${selectedSession.time}`
+                      ? `${formattedDate}, at
+                    ${selectedSession.time}`
                       : "Select time and date of session"}
                   </p>
 
@@ -279,7 +283,9 @@ const Booking = () => {
               <i className="ri-arrow-left-s-line text-xl"></i>Back
             </Button>
           </div>
-          <h1 className="text-3xl">This service is not available</h1>
+          <h1 className="md:text-3xl text-2xl">
+            This service is not available
+          </h1>
         </div>
       )}
     </div>
