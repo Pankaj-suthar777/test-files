@@ -134,19 +134,21 @@ const HamNav = ({ isOpen, setIsOpen }) => {
             </ListItemPrefix>
             Contact
           </ListItem>
-          <ListItem
-            onClick={() => {
-              localStorage.removeItem("token");
-              dispatch(SetUser(null));
-              navigate("/login");
-              setIsOpen(false);
-            }}
-          >
-            <ListItemPrefix>
-              <i className="ri-logout-box-line"></i>
-            </ListItemPrefix>
-            Logout
-          </ListItem>
+          {user && (
+            <ListItem
+              onClick={() => {
+                localStorage.removeItem("token");
+                dispatch(SetUser(null));
+                navigate("/login");
+                setIsOpen(false);
+              }}
+            >
+              <ListItemPrefix>
+                <i className="ri-logout-box-line"></i>
+              </ListItemPrefix>
+              Logout
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </React.Fragment>
