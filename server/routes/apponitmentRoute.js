@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Appointment = require("../models/reservationSchema");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-router.get("/", authMiddleware, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Create a new appointment instance using the request body
     const appointments = await Appointment.find({ isBooked: true }).sort({
@@ -25,7 +25,7 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/user", authMiddleware, async (req, res) => {
+router.get("/user", async (req, res) => {
   try {
     const appointments = await Appointment.find({
       clientId: req.body.userId,
@@ -72,7 +72,7 @@ router.post("/add", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/current/:id", authMiddleware, async (req, res) => {
+router.get("/current/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const appointment = await Appointment.find({ service: id }).populate(
@@ -93,7 +93,7 @@ router.get("/current/:id", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/current/process/:id", authMiddleware, async (req, res) => {
+router.get("/current/process/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const appointment = await Appointment.findById(id);

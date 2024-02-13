@@ -17,7 +17,7 @@ router.post("/add-service", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/get-services", authMiddleware, async (req, res) => {
+router.get("/get-services", async (req, res) => {
   try {
     const services = await Service.find({}).sort({ createdAt: -1 });
 
