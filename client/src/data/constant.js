@@ -1,9 +1,9 @@
-//export const deployed_url = "https://test-5fik.onrender.com/";
-export const deployed_url = "v";
-//export const deployed_url = "k";
-//export const stripe_publishable_key =
-//"pk_test_51OhvW7Gr7paNn0fxbC8fWbjyifJHhT5vKdT8IR2oz8X8bAbz0oiJaqHMg8B9bUjNaEwBffNgspnjAR0QlISGQPel00EN3uyBLK";
-export const stripe_publishable_key = "j";
+export const deployed_url = "https://test-5fik.onrender.com/";
+//export const deployed_url = "v";
+
+export const stripe_publishable_key =
+  "pk_test_51OhvW7Gr7paNn0fxbC8fWbjyifJHhT5vKdT8IR2oz8X8bAbz0oiJaqHMg8B9bUjNaEwBffNgspnjAR0QlISGQPel00EN3uyBLK";
+//export const stripe_publishable_key = "j";
 export const infoOfBusiness = {
   Address: "500 Terry Francine Street, San Francisco, CA 94158",
   email: "Info@mysite.com",

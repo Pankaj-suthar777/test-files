@@ -11,11 +11,11 @@ const SocialIcon = ({ size }) => {
       >
         <svg
           className={`${
-            size == "sm"
+            size === "sm"
               ? "h-5 w-5"
-              : size == "md"
+              : size === "md"
               ? "h-8 w-8"
-              : size == "xl"
+              : size === "xl"
               ? "h-10 w-10"
               : ""
           }`}
@@ -37,11 +37,11 @@ const SocialIcon = ({ size }) => {
       >
         <svg
           className={`${
-            size == "sm"
+            size === "sm"
               ? "h-5 w-5"
-              : size == "md"
+              : size === "md"
               ? "h-8 w-8"
-              : size == "xl"
+              : size === "xl"
               ? "h-10 w-10"
               : ""
           }`}
@@ -62,11 +62,11 @@ const SocialIcon = ({ size }) => {
       >
         <svg
           className={`${
-            size == "sm"
+            size === "sm"
               ? "h-5 w-5"
-              : size == "md"
+              : size === "md"
               ? "h-8 w-8"
-              : size == "xl"
+              : size === "xl"
               ? "h-10 w-10"
               : ""
           }`}
