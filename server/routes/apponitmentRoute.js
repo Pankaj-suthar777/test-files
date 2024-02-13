@@ -6,13 +6,12 @@ router.get("/", async (req, res) => {
   try {
     // Create a new appointment instance using the request body
     const appointments = await Appointment.find({ isBooked: true }).sort({
-      createdAt: -1,
+      updatedAt: -1,
     });
 
     // Send a success response
     res.status(201).send({
       success: true,
-      message: "Availability added successfully",
       data: appointments,
     });
   } catch (error) {
@@ -37,7 +36,6 @@ router.get("/user", authMiddleware, async (req, res) => {
     // Send a success response
     res.status(201).send({
       success: true,
-      message: "Availability added successfully",
       data: appointments,
     });
   } catch (error) {
