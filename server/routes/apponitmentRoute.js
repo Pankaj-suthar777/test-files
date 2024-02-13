@@ -25,10 +25,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/user", async (req, res) => {
+router.get("/user", authMiddleware, async (req, res) => {
   try {
     const appointments = await Appointment.find({
       clientId: req.body.userId,
+      isPaid: true,
     }).sort({
       createdAt: -1,
     });
@@ -75,9 +76,10 @@ router.post("/add", authMiddleware, async (req, res) => {
 router.get("/current/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const appointment = await Appointment.find({ service: id }).populate(
-      "service"
-    );
+    const appointment = await Appointment.find({
+      service: id,
+      isBooked: false,
+    }).populate("service");
 
     res.status(201).send({
       success: true,

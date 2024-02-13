@@ -1,4 +1,4 @@
-export const deployed_url = "https://test-5fik.onrender.com/";
+export const deployed_url = "https://test-5fik.onrender.com";
 //export const deployed_url = "v";
 
 export const stripe_publishable_key =

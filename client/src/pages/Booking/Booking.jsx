@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import DatePickerForClient from "./DatePickerForClient";
 import { useEffect, useState } from "react";
-import { GetCurrentSer } from "../../apicalls/appointment";
+import { GetNotBookedSession } from "../../apicalls/appointment";
 import { useDispatch } from "react-redux";
 import { SetLoader } from "../../redux/loadersSlice";
 import { SetToast } from "../../redux/toastSlice";
@@ -11,9 +11,11 @@ import { Button } from "@mui/material";
 const Booking = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [appointments, setAppointments] = useState([]);
-  const [selectedSession, setSelectedSession] = useState({});
+  const [selectedSession, setSelectedSession] = useState("");
   const [selectedAvailableAppointments, setSelectedAvailableAppointments] =
     useState([]);
+  console.log(selectedSession);
+  console.log(appointments);
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,7 +24,7 @@ const Booking = () => {
   async function getData() {
     try {
       dispatch(SetLoader(true));
-      const res = await GetCurrentSer(id);
+      const res = await GetNotBookedSession(id);
       dispatch(SetLoader(false));
       if (res.success) {
         setAppointments(res.data);
@@ -62,7 +64,7 @@ const Booking = () => {
   ) {
     const firstAppointment = selectedAvailableAppointments[0];
     const appointmentDate = new Date(
-      firstAppointment.availabilityData.split(" ")[0]
+      firstAppointment?.availabilityData?.split(" ")[0]
     );
     formattedDate = appointmentDate.toLocaleDateString("en-US", {
       weekday: "long",
@@ -108,39 +110,69 @@ const Booking = () => {
             </div>
 
             <div className="px-1 xl:mt-0 mt-10 py-1 xl:p-8 flex  flex-col gap-4 overflow-scroll ">
-              <p className="text-[#0A2472]  lg:text-lg text-center w-full text-md tracking-wider">
-                {formattedDate ? formattedDate : "Select another date"}
+              <p className="text-[rgb(10,36,114)]  lg:text-lg text-center w-full text-md tracking-wider">
+                <div>
+                  {formattedDate === "" ? "Select another date" : formattedDate}
+                </div>
+                <div className="mt-5">
+                  {formattedDate === "" ? (
+                    <Button
+                      variant="contained"
+                      onClick={(e) => {
+                        if (appointments.length > 0) {
+                          const firstAppointment = appointments[0];
+                          setSelectedAvailableAppointments([firstAppointment]);
+                          setSelectedSession({
+                            sessionid: firstAppointment?._id,
+                            time: firstAppointment?.availabilityData?.split(
+                              " "
+                            )[1],
+                            date: firstAppointment?.availabilityData?.split(
+                              " "
+                            )[0],
+                            serviceId: id,
+                          });
+                        }
+                      }}
+                    >
+                      {appointments.length < 0
+                        ? "sessions is not available"
+                        : "Next availability"}
+                    </Button>
+                  ) : null}
+                </div>
               </p>
               <div className="w-full flex justify-center">
                 <div className="flex flex-wrap justify-center gap-4  max-w-[400px]">
-                  {selectedDate === "" ? (
+                  {selectedDate === "" &&
+                  selectedSession === "" &&
+                  formattedDate !== "" &&
+                  appointments.length > 0 ? (
                     <div className="w-full h-[200px] flex justify-center items-center">
                       <Button
                         variant="contained"
                         onClick={(e) => {
-                          if (appointments.length > 1) {
-                            if (appointments.length > 0) {
-                              const firstAppointment = appointments.find(
-                                (appointment) => !appointment.isPaid
-                              );
-                              setSelectedAvailableAppointments([
-                                firstAppointment,
-                              ]);
-                              setSelectedSession({
-                                sessionid: firstAppointment._id,
-                                time: firstAppointment.availabilityData.split(
-                                  " "
-                                )[1],
-                                date: firstAppointment.availabilityData.split(
-                                  " "
-                                )[0],
-                                serviceId: id,
-                              });
-                            }
+                          if (appointments.length > 0) {
+                            const firstAppointment = appointments[0];
+                            setSelectedAvailableAppointments([
+                              firstAppointment,
+                            ]);
+                            setSelectedSession({
+                              sessionid: firstAppointment?._id,
+                              time: firstAppointment?.availabilityData?.split(
+                                " "
+                              )[1],
+                              date: firstAppointment?.availabilityData?.split(
+                                " "
+                              )[0],
+                              serviceId: id,
+                            });
                           }
                         }}
                       >
-                        Next availability
+                        {appointments.length < 0
+                          ? "sessions is not available"
+                          : "Next availability"}
                       </Button>
                     </div>
                   ) : (
@@ -154,9 +186,9 @@ const Booking = () => {
                         } `}
                         onClick={() =>
                           setSelectedSession({
-                            sessionid: appointment._id,
-                            time: appointment.availabilityData.split(" ")[1],
-                            date: appointment.availabilityData.split(" ")[0],
+                            sessionid: appointment?._id,
+                            time: appointment?.availabilityData?.split(" ")[1],
+                            date: appointment?.availabilityData?.split(" ")[0],
                             serviceId: id,
                           })
                         }
@@ -169,18 +201,18 @@ const Booking = () => {
                         }}
                       >
                         {
-                          appointment.availabilityData
+                          appointment?.availabilityData
                             .split(" ")[1]
                             .split("-")[0]
                         }
                         :
                         {
-                          appointment.availabilityData
+                          appointment?.availabilityData
                             .split(" ")[1]
                             .split("-")[1]
                         }{" "}
                         {
-                          appointment.availabilityData
+                          appointment?.availabilityData
                             .split(" ")[1]
                             .split("-")[2]
                         }

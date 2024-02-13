@@ -31,7 +31,7 @@ export const AddAppointment = async (payload) => {
 };
 
 // get service
-export const GetCurrentSer = async (id) => {
+export const GetNotBookedSession = async (id) => {
   try {
     const response = await axiosInstance.get(`/api/apponitment/current/${id}`);
     return response.data;

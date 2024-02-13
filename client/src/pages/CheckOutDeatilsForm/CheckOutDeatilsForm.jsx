@@ -121,7 +121,7 @@ const CheckOutDeatilsForm = () => {
         dispatch(
           SetToast({
             open: true,
-            message: "Some one has already booked the seesion",
+            message: "Someone has already booked the seesion",
             type: "info",
           })
         );
@@ -130,7 +130,7 @@ const CheckOutDeatilsForm = () => {
       dispatch(
         SetToast({
           open: true,
-          message: "Somebooked session before you",
+          message: "Someone has already booked the seesion",
           type: "info",
         })
       );
