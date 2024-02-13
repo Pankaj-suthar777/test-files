@@ -33,7 +33,8 @@ const CheckOutDeatilsForm = () => {
   const [email, setEmail] = useState(user?.email || "");
   const [message, setMessage] = useState("");
   const { id, sessionId } = useParams();
-
+  console.log(service);
+  console.log(session);
   async function getData() {
     try {
       const res1 = await GetAService(id);
@@ -70,63 +71,51 @@ const CheckOutDeatilsForm = () => {
 
   async function makeAppointmentConfirm() {
     dispatch(SetLoader(true));
-    const res = await GetCheckOutAppointment(sessionId);
-    if (res.data.isBooked === false) {
-      const resAppontment = await GetCheckOutAppointment(sessionId);
-      if (!resAppontment.isBooked) {
-        const stripe = await loadStripe(stripe_publishable_key);
-        const order = {
-          appointmentId: session._id,
-          price: service.price,
-          serviceTitle: service.title,
-          clientId: user._id,
-          isPaid: true,
-          isBooked: true,
-          profilePicture: user.profilePicture,
-          phone: phone,
-          message: message,
-          email: email === "" ? user.email : email,
-          name: name === "" ? user.name : name,
-        };
-        let sessionArray = [];
-        sessionArray.push(order);
-        console.log(sessionArray);
-        const body = {
-          sessionArray: sessionArray,
-        };
-        const headers = {
-          "Content-Type": "application/json",
-        };
-        const response = await fetch(
-          `${deployed_url}/api/create-checkout-process`,
-          {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body),
-          }
-        );
-        const sess = await response.json();
-        dispatch(SetLoader(false));
-        const result = stripe.redirectToCheckout({
-          sessionId: sess.id,
-        });
-        if (result.error) {
-          console.log(result.error);
-          dispatch(SetLoader(false));
-        } else {
-          dispatch(SetLoader(false));
+
+    const resAppontment = await GetCheckOutAppointment(sessionId);
+    if (resAppontment.data.isBooked === false) {
+      const stripe = await loadStripe(stripe_publishable_key);
+      const order = {
+        appointmentId: session._id,
+        price: service.price,
+        serviceTitle: service.title,
+        clientId: user._id,
+        isPaid: true,
+        isBooked: true,
+        profilePicture: user.profilePicture,
+        phone: phone,
+        message: message,
+        email: email === "" ? user.email : email,
+        name: name === "" ? user.name : name,
+      };
+      let sessionArray = [];
+      sessionArray.push(order);
+      console.log(sessionArray);
+      const body = {
+        sessionArray: sessionArray,
+      };
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const response = await fetch(
+        `${deployed_url}/api/create-checkout-process`,
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body),
         }
-      } else {
-        navigate("/services");
-        dispatch(
-          SetToast({
-            open: true,
-            message: "Someone has already booked the seesion",
-            type: "info",
-          })
-        );
+      );
+      const sess = await response.json();
+      dispatch(SetLoader(false));
+      const result = stripe.redirectToCheckout({
+        sessionId: sess.id,
+      });
+      if (result.error) {
+        console.log(result.error);
+        dispatch(SetLoader(false));
       }
     } else {
+      navigate("/services");
       dispatch(
         SetToast({
           open: true,
@@ -134,7 +123,6 @@ const CheckOutDeatilsForm = () => {
           type: "info",
         })
       );
-      navigate("/services");
     }
   }
 
