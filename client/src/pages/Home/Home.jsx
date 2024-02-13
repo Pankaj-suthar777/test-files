@@ -18,7 +18,7 @@ const Home = () => {
           </p>
         </div>
         <img
-          className="md:pt-[220px] md:pl-[150px] md:ml-auto  relative z-10 rounded-full"
+          className="md:pt-[220px] md:pl-[150px] md:ml-auto  relative z-10"
           src="https://static.wixstatic.com/media/84770f_cc7fbf222d044cf09028f921a0cfe36e~mv2.png/v1/fill/w_1163,h_699,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/shutterstock_184908566%20copy.png"
           alt=""
         ></img>
