@@ -19,6 +19,8 @@ import ErrorPage from "./pages/ErrorPage/Error";
 import SuccessPage from "./pages/SuccessPage/Success";
 
 function App() {
+  const currentURL = window.location.href;
+  console.log("Current URL:", currentURL);
   const toasts = useSelector((state) => state.toasts);
   const loaders = useSelector((state) => state.loaders);
 
